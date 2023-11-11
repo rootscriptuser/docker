@@ -1,0 +1,35 @@
+---
+version: "2.1"
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Ljubljana
+      - USER=username
+      - PASS=passwd
+    volumes:
+      - /home/raspberry/transmission:/config
+      - /mnt/elements2TB/transmission:/downloads
+      - /mnt/elements2TB/transmission:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    networks:
+      vlan:
+        ipv4_address: 192.168.8.60
+
+networks:
+  vlan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "192.168.8.0/24"
+          ip_range: "192.168.8.64/26"
+          gateway: "192.168.8.1"
