@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    image: 'filebrowser/filebrowser:latest'
+    environment:
+      - UID=1000
+      - GID=1000
+      - TZ=Europe/Ljubljana
+    ports:
+      - '8080:80'
+    volumes:
+      - /media/elements2TB/:/srv
+      - /home/piratefilebrowser/filebrowser.db:/database/filebrowser.db
+      - /home/pirate/filebrowser/settings.json:/config/settings.json
+    restart: unless-stopped
