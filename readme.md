@@ -20,3 +20,9 @@ mkdir APPNAME && cd APPNAME
 curl GIT-COMPOSE.YML > docker-compose.yml
 docker compose up -d
 ```
+
+## TO-DO
+* docker compose stop+
+* docker compose top
+* docker compose ps
+* yml name && version
